@@ -6,6 +6,16 @@ import Modal from '../Modal';
 function InventoryItem({ item }) {
   const [ showModal, setShowModal ] = useState(false);
   const modalHeader = `Edit ${item.title}`;
+  const modalActions = (
+    <div>
+      <button className="btn" onClick={ () => setShowModal(false) }>
+        Close
+      </button>
+      <button className="btn btn-primary" onClick={ () => setShowModal(false) }>
+        Do Things
+      </button>
+    </div>
+  );
 
   return (
     <Card key={ item.id }>
@@ -18,7 +28,8 @@ function InventoryItem({ item }) {
           <span>{ item.stock }/{ item.desired }</span>
         </div>
         <button onClick={ () => setShowModal(true) }>Test Modal</button>
-        <Modal show={ showModal } closeModal={ () => setShowModal(false) } header={ modalHeader }>
+        <Modal show={ showModal } closeModal={ () => setShowModal(false) }
+               header={ modalHeader } actions={ modalActions }>
           Testing edit inventory for item with ID {item.id}.
         </Modal>
       </div>

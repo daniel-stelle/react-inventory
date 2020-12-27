@@ -49,18 +49,18 @@ import './styles.scss';
 
 // export default Modal;
 
-export default function Modal({ show, closeModal, children }) {
+export default function Modal({ show, closeModal, header, actions, children }) {
   if (show) {
     return (
       <div className="modal">
         <div className="modal-main">
-          <h2>Modal Window</h2>
+          <h2>{ header }</h2>
           <FontAwesomeIcon icon="times" className="close-icon" onClick={ closeModal } />
           <div className="content">
             { children }
           </div>
           <div className="actions">
-            <button className="btn btn-primary" onClick={ closeModal }>Close</button>
+            { actions }
           </div>
         </div>
       </div>

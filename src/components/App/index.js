@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './styles.scss';
+import '../../styles/_base.scss';
 import Navbar from '../Navbar';
 import Inventory from '../Inventory';
 import { library } from '@fortawesome/fontawesome-svg-core'

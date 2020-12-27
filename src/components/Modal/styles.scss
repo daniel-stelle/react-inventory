@@ -17,16 +17,39 @@
     transform: translate(-50%,-50%);
     border-radius: 5px;
     padding: 0 20px 20px;
+    display: flex;
+    flex-direction: column;
 
     .close-icon {
       position: absolute;
+      padding: 3px 6px;
       top: 15px;
       right: 20px;
       cursor: pointer;
 
       &:hover {
         background: lightgray;
+        border-radius: 3px;
       }
+    }
+
+    .actions {
+      margin-top: 20px;
+
+      // button {
+      //   padding: 6px 13px;
+      //   background: none;
+      //   border: 1px solid lightgray;
+      //   border-radius: 4px;
+      //   font-size: 15px;
+      //   color: gray;
+      //   cursor: pointer;
+
+      //   &:hover {
+      //     background: lightgray;
+      //     color: white;
+      //   }
+      // }
     }
   }
 }

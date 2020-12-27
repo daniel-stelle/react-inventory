@@ -1,9 +1,5 @@
-.store {
+.inventory-item {
+  display: flex;
+  flex-direction: row;
   padding: 5px;
-  display: inline-block;
-}
-
-.title {
-  padding: 5px;
-  display: inline-block;
 }

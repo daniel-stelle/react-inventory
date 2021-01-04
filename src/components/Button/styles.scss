@@ -1,0 +1,22 @@
+button {
+  padding: 6px 13px;
+  background: none;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  font-size: 15px;
+  color: gray;
+  cursor: pointer;
+
+}
+
+.primary {
+  background: blue;
+  border: 1px solid blue;
+  color: white;
+}
+
+.danger {
+  background: red;
+  border: 1px solid red;
+  color: white;
+}

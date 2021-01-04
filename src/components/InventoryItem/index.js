@@ -1,21 +1,62 @@
 import React, { useState } from 'react';
+
 import './styles.scss';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import Card from '../Card';
+import Button from '../Button';
 import Modal from '../Modal';
 
-function InventoryItem({ item }) {
+function InventoryItem({ item, editItem, removeItem }) {
   const [ showModal, setShowModal ] = useState(false);
-  const modalHeader = `Edit ${item.title}`;
-  const modalActions = (
-    <div>
-      <button className="btn" onClick={ () => setShowModal(false) }>
-        Close
-      </button>
-      <button className="btn btn-primary" onClick={ () => setShowModal(false) }>
-        Do Things
-      </button>
-    </div>
-  );
+  const [ modalHeader, setModalHeader ] = useState(null);
+  const [ modalBody, setModalBody ] = useState(null);
+  const [ modalActions, setModalActions ] = useState(null);
+
+  const resetModal = () => {
+    setModalHeader(null);
+    setModalBody(null);
+    setModalActions(null);
+  };
+
+  const openEditModal = () => {
+    resetModal();
+
+    setModalHeader(`Edit ${item.title}`);
+    setModalBody(`Testing edit inventory for item "${item.title}".`);
+    setModalActions((
+      <>
+        <Button action={ () => setShowModal(false) }>
+          Cancel
+        </Button>
+        <Button type="primary" action={ () => setShowModal(false) }>
+          Edit Item
+        </Button>
+      </>
+    ));
+
+    setShowModal(true);
+  };
+
+  const openConfirmRemoveModal = () => {
+    resetModal();
+
+    setModalHeader(`Remove ${item.title}`);
+    setModalBody(`Are you sure you want to remove "${item.title}"?`);
+    setModalActions(
+      <>
+        <Button action={ () => setShowModal(false) }>
+          Cancel
+        </Button>
+        <Button type="danger" action={ () => removeItem(item.id) }>
+          Remove Item
+        </Button>
+      </>
+    );
+
+    setShowModal(true);
+  };
 
   return (
     <Card key={ item.id }>
@@ -27,10 +68,15 @@ function InventoryItem({ item }) {
           <span>{ item.title }</span>
           <span>{ item.stock }/{ item.desired }</span>
         </div>
-        <button onClick={ () => setShowModal(true) }>Test Modal</button>
+        <Button action={ openEditModal }>
+          <FontAwesomeIcon icon="edit" />
+        </Button>
+        <Button action={ openConfirmRemoveModal }>
+          <FontAwesomeIcon icon="trash" />
+        </Button>
         <Modal show={ showModal } closeModal={ () => setShowModal(false) }
                header={ modalHeader } actions={ modalActions }>
-          Testing edit inventory for item with ID {item.id}.
+          { modalBody }
         </Modal>
       </div>
     </Card>

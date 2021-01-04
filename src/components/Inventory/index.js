@@ -3,7 +3,7 @@ import './styles.scss';
 import InventoryItem from '../InventoryItem';
 
 export default function Inventory() {
-  const [ inventoryItems ] = useState([
+  const [ inventoryItems, setInventoryItems ] = useState([
     {
       id: 1,
       title: "Onions",
@@ -26,16 +26,28 @@ export default function Inventory() {
       desired: 3
     }
   ]);
+  const createItem = (newItem) => {
+    setInventoryItems([...inventoryItems, newItem]);
+  };
+  const editItem = (editedItem) => {
+    const newInventoryItems = inventoryItems.map(invItem => {
+      return editedItem.id === invItem.id ? editedItem : invItem;
+    });
+
+    setInventoryItems(newInventoryItems);
+  };
+  const removeItem = (itemId) => {
+    setInventoryItems(inventoryItems.filter(invItem => itemId !== invItem.id));
+  };
   const inventoryItemsJSX = inventoryItems.length ? (
     inventoryItems.map(item => {
       return (
-        <InventoryItem item={ item }></InventoryItem>
+        <InventoryItem key={ item.id } item={ item } editItem={ editItem } removeItem={ removeItem } />
       );
     })
   ) : (
     <div>No items yet</div>
   );
-
 
   return (
     <div className="inventory">
